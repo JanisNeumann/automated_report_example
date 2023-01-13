@@ -11,7 +11,7 @@ The regression model doesn't actually work particularly well, but ultimately, I 
 ## Notes:
 Code was written under R 4.2.1.
 
-Due to the sheer scope of the 450k array, running the code requires over 20GB RAM. The required files will require roughly 16.5GB of disk space.
+Due to the sheer scope of the 450k array, running the code requires over 20GB RAM. The required files will take up roughly 16.5GB of disk space.
 
 ## Order of operations:
 After cloning the repository, run the files in the following order:
