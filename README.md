@@ -12,7 +12,7 @@ This is more of a tech demo for the automated reports than a sophisticated machi
 ## Notes:
 Code was written under R 4.2.1.
 
-Due to the sheer scope of the 450k array, running the code requires over 20GB RAM. The required files will take up roughly 16.5GB of disk space.
+Due to the sheer scope of the 450k array, running the code requires over 20GB RAM. The required files will take up roughly 16.5GB of space.
 
 ## Order of operations:
 After cloning the repository, run the files in the following order:
