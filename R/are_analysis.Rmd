@@ -1,0 +1,96 @@
+---
+title: "PD Diagnosis Report"
+author: "Janis Neumann"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme:
+      version: 4
+      bootswatch: flatly
+    toc: true
+---
+
+```{r echo=FALSE, include=FALSE}
+
+library(ggplot2)
+library(viridis)
+library(knitr)
+library(kableExtra)
+
+source("R/are_geom_split_violin.R")
+
+```
+
+---
+### Data Overview
+
+Parkinson's disease diagnoses in training, development and holdout data.
+```{r echo=FALSE, fig.asp=1}
+knitr::kable(tibble::tibble(report_input$cohort_table)) %>% 
+  kableExtra::kable_styling(full_width = FALSE, position = "left")
+```
+
+```{r echo=FALSE, include=FALSE}
+vio_p <- ggplot(report_input$clinical_data, aes(x = Gender, y = Age, fill = Group)) +
+  geom_split_violin(scale = "count") +
+  theme_bw() +
+  scale_fill_viridis(alpha = 0.7, begin = 0.2, end = 0.8, discrete = TRUE, option = "D") +
+  theme(legend.position="bottom") +
+  facet_wrap(~ Data)
+```
+
+Age and gender distribution in training, development and holdout data.
+```{r echo=FALSE, fig.asp=0.7}
+vio_p
+```
+
+```{r echo=FALSE, include=FALSE}
+pca_p <- ggplot(report_input$pca_pd,aes(x = V1, y = V2)) +
+  geom_point(size = 2, aes(color = Group, shape = Gender)) +
+  theme_bw() +
+  xlab(paste0("PC 1 (", round(report_input$pca_imp[2, 1], 2)*100, "% of variance)")) +
+  ylab(paste0("PC 2 (", round(report_input$pca_imp[2, 2], 2)*100, "% of variance)")) +
+  theme(legend.position="bottom") +
+  scale_color_viridis(alpha = 0.9, begin = 0.2, end = 0.8, discrete = TRUE, option = "D")
+```
+
+PCA of all three partitions of the data combined.
+```{r echo=FALSE, fig.asp=1.1}
+pca_p
+```
+
+
+### Model Performance
+
+```{r echo=FALSE, include=FALSE}
+roc_p <- ggplot(report_input$roc, aes(x = FPR, y = TPR)) +
+  geom_line() +
+  theme_bw()
+```
+
+ROC curve for development set predictions, shown for the model achieving the highest balanced accuracy (average of sensitivity & specificity).
+
+```{r echo=FALSE, fig.asp=1}
+roc_p
+```
+
+Performance metrics for the best model, selected based on development set performance.
+```{r echo=FALSE, fig.asp=1}
+knitr::kable(tibble::tibble(report_input$metrics)) %>% 
+  kableExtra::kable_styling(full_width = FALSE, position = "left")
+```
+
+```{r echo=FALSE, include=FALSE}
+cm_p <- ggplot(report_input$holdout_pred, aes(x = Observed, y = Predicted, color = Observed)) +
+  geom_point(position = position_jitter(seed = 1, width = 0.4), aes(color = Observed)) +
+  scale_shape_manual(values = c(1, 16)) +
+  geom_hline(yintercept = 0.5) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  ylim(0, 1)
+```
+
+Predicted/Observed plot showing numeric values of model predictions.
+```{r echo=FALSE, fig.asp=0.7}
+cm_p
+```
