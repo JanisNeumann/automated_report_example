@@ -27,3 +27,8 @@ You may want to also run are_cleanup.R.
 This simply removes all files that aren't needed by are_analysis.R - of course, you can also just manually delete the whole repository when done.
 
 Alternatively, an example report is already included: results/example/analysis_report.html - running the entire pipeline just lets you reproduce it.
+
+## Citations for used GEO data
+Chuang YH, Paul KC, Bronstein JM, Bordelon Y et al. Parkinson's disease is associated with DNA methylation levels in human blood and saliva. Genome Med 2017 Aug 30;9(1):76. PMID: 28851441
+Horvath S, Ritz BR. Increased epigenetic age and granulocyte counts in the blood of Parkinson's disease patients. Aging (Albany NY) 2015 Dec;7(12):1130-42. PMID: 26655927
+Chuang YH, Lu AT, Paul KC, Folle AD et al. Longitudinal Epigenome-Wide Methylation Study of Cognitive Decline and Motor Progression in Parkinson's Disease. J Parkinsons Dis 2019;9(2):389-400. PMID: 30958317
