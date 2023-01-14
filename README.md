@@ -26,4 +26,4 @@ This will produce a file called analysis_report.html in a timestamped subdirecto
 You may want to also run are_cleanup.R.
 This simply removes all files that aren't needed by are_analysis.R - of course, you can also just manually delete the whole repository when done.
 
-###Alternatively, an example report is already included: results/example
+Alternatively, an example report is already included: results/example/analysis_report.html - running the entire pipeline just lets you reproduce it.
